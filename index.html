@@ -250,6 +250,16 @@
   .cta h3 { margin:0 0 6px; font-size:20px; }
   .cta p { margin:0 0 14px; opacity:.92; }
   .cta .btn.white { background:#1b1b1b; color:#FFCA28; }
+  /* The share rows reused .btn.white, which is only given a colour INSIDE .cta --
+     outside it they inherited no background or text colour and were nearly
+     unreadable on the modal (beta feedback 2026-09-10). Own class, explicit
+     colours: off-white on the panel is 15:1. */
+  .sharebtn { display:flex; align-items:center; gap:10px; width:100%; margin-top:8px;
+    padding:12px 14px; border-radius:10px; text-align:left; text-decoration:none;
+    background:var(--panel-2,#2c2c2c); border:1px solid var(--line); color:var(--text);
+    font-family:inherit; font-size:14.5px; font-weight:600; cursor:pointer; }
+  .sharebtn:hover { border-color:var(--accent); color:var(--accent); }
+  .sharebtn .si { font-size:17px; width:22px; text-align:center; }
   .cta .row { display:flex; gap:10px; flex-wrap:wrap; }
 
   /* Social-asset export controls */
@@ -697,7 +707,7 @@
         <h3><span class="lft"><span class="ic">📚</span> Go Deeper</span></h3>
         <ul>
           <li><a class="reslink" href="https://instagram.com/therecount" target="_blank" rel="noopener">The Recount on Instagram — follow us →</a></li>
-          <li><a class="reslink" href="https://ballotpedia.org" target="_blank" rel="noopener">Ballotpedia — candidate profiles</a></li>
+          <li id="bpProfiles"><a class="reslink" href="https://ballotpedia.org" target="_blank" rel="noopener">Ballotpedia — candidate profiles</a></li>
           <li><a class="reslink" href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets — campaign finance</a></li>
         </ul>
         <!-- Local outlets are rendered from LOCAL_SOURCES rather than hand-typed. The two
@@ -973,49 +983,49 @@
     "California": [{name:"CalMatters",url:"https://calmatters.org"}, {name:"KVPR",url:"https://kvpr.org"}, {name:"GV Wire",url:"https://gvwire.com"}, {name:"KPBS Public Media",url:"https://kpbs.org"}],
     "Colorado": [{name:"Colorado Newsline",url:"https://coloradonewsline.com"}, {name:"cpr.org",url:"https://cpr.org"}, {name:"The Denver Post",url:"https://denverpost.com"}],
     "Connecticut": [{name:"CT Mirror",url:"https://ctmirror.org"}, {name:"Hartford Courant",url:"https://courant.com"}, {name:"Connecticut Public",url:"https://ctpublic.org"}],
-    "Delaware": [{name:"Spotlight Delaware",url:"https://spotlightdelaware.org"}, {name:"Delaware Online",url:"https://delawareonline.com"}, {name:"Delaware Public Media",url:"https://delawarepublic.org"}],
+    "Delaware": [{name:"Spotlight Delaware",url:"https://spotlightdelaware.org"}, {name:"Delaware Online",url:"https://delawareonline.com"}, {name:"Delaware Public Media",url:"https://www.delawarepublic.org"}],
     "Florida": [{name:"South Florida Sun Sentinel",url:"https://sun-sentinel.com"}, {name:"Florida Phoenix",url:"https://floridaphoenix.com"}, {name:"fox13news.com",url:"https://fox13news.com"}, {name:"Florida Politics",url:"https://floridapolitics.com"}],
     "Georgia": [{name:"wjcl.com",url:"https://wjcl.com"}],
-    "Hawaii": [{name:"Honolulu Civil Beat",url:"https://civilbeat.org"}, {name:"Honolulu Star-Advertiser",url:"https://staradvertiser.com"}, {name:"Hawaii Public Radio",url:"https://hawaiipublicradio.org"}],
-    "Idaho": [{name:"Idaho Capital Sun",url:"https://idahocapitalsun.com"}, {name:"Idaho Statesman",url:"https://www.idahostatesman.com"}, {name:"Boise State Public Radio",url:"https://boisestatepublicradio.org"}],
+    "Hawaii": [{name:"Honolulu Civil Beat",url:"https://civilbeat.org"}, {name:"Honolulu Star-Advertiser",url:"https://staradvertiser.com"}, {name:"Hawaii Public Radio",url:"https://www.hawaiipublicradio.org"}],
+    "Idaho": [{name:"Idaho Capital Sun",url:"https://idahocapitalsun.com"}, {name:"Idaho Statesman",url:"https://www.idahostatesman.com"}, {name:"Boise State Public Radio",url:"https://www.boisestatepublicradio.org"}],
     "Illinois": [{name:"Capitol News Illinois",url:"https://capitolnewsillinois.com"}, {name:"Chicago Tribune",url:"https://chicagotribune.com"}, {name:"WBEZ",url:"https://wbez.org"}],
     "Indiana": [{name:"Indiana Capital Chronicle",url:"https://indianacapitalchronicle.com"}, {name:"IndyStar",url:"https://indystar.com"}, {name:"WFYI",url:"https://wfyi.org"}],
     "Iowa": [{name:"Iowa Capital Dispatch",url:"https://iowacapitaldispatch.com"}, {name:"Iowa Public Radio",url:"https://iowapublicradio.org"}, {name:"The Des Moines Register",url:"https://desmoinesregister.com"}, {name:"Little Village",url:"https://littlevillagemag.com"}],
-    "Kansas": [{name:"Kansas Reflector",url:"https://kansasreflector.com"}, {name:"The Wichita Eagle",url:"https://www.kansas.com"}, {name:"KCUR",url:"https://kcur.org"}],
+    "Kansas": [{name:"Kansas Reflector",url:"https://kansasreflector.com"}, {name:"The Wichita Eagle",url:"https://www.kansas.com"}, {name:"KCUR",url:"https://www.kcur.org"}],
     "Kentucky": [{name:"Kentucky Lantern",url:"https://kentuckylantern.com"}, {name:"Courier Journal",url:"https://courier-journal.com"}, {name:"Louisville Public Media",url:"https://lpm.org"}],
-    "Louisiana": [{name:"Louisiana Illuminator",url:"https://lailluminator.com"}, {name:"NOLA.com",url:"https://nola.com"}, {name:"WWNO",url:"https://wwno.org"}],
-    "Maine": [{name:"Maine Morning Star",url:"https://mainemorningstar.com"}, {name:"Portland Press Herald",url:"https://pressherald.com"}, {name:"Maine Public",url:"https://mainepublic.org"}],
+    "Louisiana": [{name:"Louisiana Illuminator",url:"https://lailluminator.com"}, {name:"NOLA.com",url:"https://nola.com"}, {name:"WWNO",url:"https://www.wwno.org"}],
+    "Maine": [{name:"Maine Morning Star",url:"https://mainemorningstar.com"}, {name:"Portland Press Herald",url:"https://pressherald.com"}, {name:"Maine Public",url:"https://www.mainepublic.org"}],
     "Maryland": [{name:"Maryland Matters",url:"https://marylandmatters.org"}, {name:"The Baltimore Banner",url:"https://thebaltimorebanner.com"}, {name:"The Baltimore Sun",url:"https://baltimoresun.com"}],
     "Massachusetts": [{name:"CommonWealth Beacon",url:"https://commonwealthbeacon.org"}, {name:"The Boston Globe",url:"https://bostonglobe.com"}, {name:"WBUR",url:"https://wbur.org"}],
-    "Michigan": [{name:"WKAR Public Media",url:"https://wkar.org"}, {name:"Michigan Advance",url:"https://michiganadvance.com"}, {name:"bridgemi.com",url:"https://bridgemi.com"}],
+    "Michigan": [{name:"WKAR Public Media",url:"https://www.wkar.org"}, {name:"Michigan Advance",url:"https://michiganadvance.com"}, {name:"bridgemi.com",url:"https://bridgemi.com"}],
     "Minnesota": [{name:"MinnPost",url:"https://minnpost.com"}, {name:"fox9.com",url:"https://fox9.com"}],
     "Mississippi": [{name:"Mississippi Today",url:"https://mississippitoday.org"}, {name:"Clarion Ledger",url:"https://clarionledger.com"}, {name:"Mississippi Public Broadcasting",url:"https://mpbonline.org"}],
     "Missouri": [{name:"Missouri Independent",url:"https://missouriindependent.com"}, {name:"St. Louis Post-Dispatch",url:"https://stltoday.com"}, {name:"St. Louis Public Radio",url:"https://stlpr.org"}],
-    "Montana": [{name:"Daily Montanan",url:"https://dailymontanan.com"}, {name:"Montana Free Press",url:"https://montanafreepress.org"}, {name:"Montana Public Radio",url:"https://mtpr.org"}],
+    "Montana": [{name:"Daily Montanan",url:"https://dailymontanan.com"}, {name:"Montana Free Press",url:"https://montanafreepress.org"}, {name:"Montana Public Radio",url:"https://www.mtpr.org"}],
     "Nebraska": [{name:"Nebraska Examiner",url:"https://nebraskaexaminer.com"}, {name:"Nebraska Public Media",url:"https://nebraskapublicmedia.org"}],
     "Nevada": [{name:"Nevada Current",url:"https://nevadacurrent.com"}, {name:"The Nevada Independent",url:"https://thenevadaindependent.com"}, {name:"Las Vegas Review-Journal",url:"https://reviewjournal.com"}],
     "New Hampshire": [{name:"New Hampshire Bulletin",url:"https://newhampshirebulletin.com"}, {name:"NH Union Leader",url:"https://unionleader.com"}, {name:"NHPR",url:"https://nhpr.org"}],
     "New Jersey": [{name:"NJ Spotlight News",url:"https://njspotlightnews.org"}, {name:"New Jersey Monitor",url:"https://newjerseymonitor.com"}],
-    "New Mexico": [{name:"Source New Mexico",url:"https://sourcenm.com"}, {name:"Albuquerque Journal",url:"https://abqjournal.com"}, {name:"KUNM",url:"https://kunm.org"}],
+    "New Mexico": [{name:"Source New Mexico",url:"https://sourcenm.com"}, {name:"Albuquerque Journal",url:"https://abqjournal.com"}, {name:"KUNM",url:"https://www.kunm.org"}],
     "New York": [{name:"cityandstateny.com",url:"https://cityandstateny.com"}],
-    "North Carolina": [{name:"WUNC",url:"https://wunc.org"}, {name:"NC Newsline",url:"https://ncnewsline.com"}, {name:"spectrumlocalnews.com",url:"https://spectrumlocalnews.com"}, {name:"Carolina Public Press",url:"https://carolinapublicpress.org"}],
+    "North Carolina": [{name:"WUNC",url:"https://www.wunc.org"}, {name:"NC Newsline",url:"https://ncnewsline.com"}, {name:"spectrumlocalnews.com",url:"https://spectrumlocalnews.com"}, {name:"Carolina Public Press",url:"https://carolinapublicpress.org"}],
     "North Dakota": [{name:"North Dakota Monitor",url:"https://northdakotamonitor.com"}, {name:"InForum",url:"https://inforum.com"}, {name:"Prairie Public",url:"https://prairiepublic.org"}],
-    "Ohio": [{name:"WVXU (91.7 Cincinnati Public Radio)",url:"https://wvxu.org"}, {name:"Ohio Capital Journal",url:"https://ohiocapitaljournal.com"}],
+    "Ohio": [{name:"WVXU (91.7 Cincinnati Public Radio)",url:"https://www.wvxu.org"}, {name:"Ohio Capital Journal",url:"https://ohiocapitaljournal.com"}],
     "Oklahoma": [{name:"Oklahoma Voice",url:"https://oklahomavoice.com"}, {name:"The Oklahoman",url:"https://oklahoman.com"}, {name:"KOSU",url:"https://kosu.org"}],
     "Oregon": [{name:"Oregon Capital Chronicle",url:"https://oregoncapitalchronicle.com"}, {name:"The Oregonian",url:"https://oregonlive.com"}, {name:"OPB",url:"https://opb.org"}],
     "Pennsylvania": [{name:"mcall.com",url:"https://mcall.com"}, {name:"penncapital-star.com",url:"https://penncapital-star.com"}, {name:"cityandstatepa.com",url:"https://cityandstatepa.com"}, {name:"Spotlight PA",url:"https://spotlightpa.org"}],
     "Rhode Island": [{name:"Rhode Island Current",url:"https://rhodeislandcurrent.com"}, {name:"Providence Journal",url:"https://providencejournal.com"}, {name:"The Public's Radio",url:"https://thepublicsradio.org"}],
-    "South Carolina": [{name:"SC Daily Gazette",url:"https://scdailygazette.com"}, {name:"The Post and Courier",url:"https://postandcourier.com"}, {name:"South Carolina Public Radio",url:"https://southcarolinapublicradio.org"}],
+    "South Carolina": [{name:"SC Daily Gazette",url:"https://scdailygazette.com"}, {name:"The Post and Courier",url:"https://postandcourier.com"}, {name:"South Carolina Public Radio",url:"https://www.southcarolinapublicradio.org"}],
     "South Dakota": [{name:"South Dakota Searchlight",url:"https://southdakotasearchlight.com"}, {name:"Argus Leader",url:"https://argusleader.com"}, {name:"SDPB",url:"https://sdpb.org"}],
     "Tennessee": [{name:"Tennessee Lookout",url:"https://tennesseelookout.com"}, {name:"The Tennessean",url:"https://tennessean.com"}, {name:"Nashville Public Radio",url:"https://wpln.org"}],
     "Texas": [{name:"The Texas Tribune",url:"https://texastribune.org"}, {name:"spectrumlocalnews.com",url:"https://spectrumlocalnews.com"}, {name:"Houston Public Media",url:"https://houstonpublicmedia.org"}],
-    "Utah": [{name:"Utah News Dispatch",url:"https://utahnewsdispatch.com"}, {name:"The Salt Lake Tribune",url:"https://sltrib.com"}, {name:"KUER",url:"https://kuer.org"}],
+    "Utah": [{name:"Utah News Dispatch",url:"https://utahnewsdispatch.com"}, {name:"The Salt Lake Tribune",url:"https://sltrib.com"}, {name:"KUER",url:"https://www.kuer.org"}],
     "Vermont": [{name:"VTDigger",url:"https://vtdigger.org"}, {name:"Vermont Public",url:"https://vermontpublic.org"}, {name:"Seven Days",url:"https://sevendaysvt.com"}],
     "Virginia": [{name:"Virginia Mercury",url:"https://virginiamercury.com"}, {name:"vpm.org",url:"https://vpm.org"}],
     "Washington": [{name:"The Seattle Times",url:"https://seattletimes.com"}, {name:"opb.org",url:"https://opb.org"}],
     "West Virginia": [{name:"West Virginia Watch",url:"https://westvirginiawatch.com"}, {name:"Charleston Gazette-Mail",url:"https://wvgazettemail.com"}, {name:"West Virginia Public Broadcasting",url:"https://wvpublic.org"}],
     "Wisconsin": [{name:"Wisconsin Examiner",url:"https://wisconsinexaminer.com"}],
-    "Wyoming": [{name:"WyoFile",url:"https://wyofile.com"}, {name:"Casper Star-Tribune",url:"https://trib.com"}, {name:"Wyoming Public Media",url:"https://wyomingpublicmedia.org"}]
+    "Wyoming": [{name:"WyoFile",url:"https://wyofile.com"}, {name:"Casper Star-Tribune",url:"https://trib.com"}, {name:"Wyoming Public Media",url:"https://www.wyomingpublicmedia.org"}]
   };
   const BALLOT_MEASURES_URL = 'https://ballotpedia.org/2026_ballot_measures';
 
@@ -3173,6 +3183,33 @@
     if(hits.length>1)  return {choices:hits};
     return {none:true,state:p.state};
   }
+
+  /* Go Deeper's Ballotpedia entry was a hardcoded link to ballotpedia.org, so it
+     dropped every reader on the site's front page regardless of the race they had
+     picked (beta feedback on ME-Sen, 2026-09-10 -- it did this for all 45). Each
+     candidate already carries a ballotpedia_url in the data; use them. */
+  function renderBallotpediaLinks(r){
+    const li=document.getElementById('bpProfiles'); if(!li) return;
+    const cands=(r&&r.cands)||[];
+    const withUrl=cands.filter(c=>(c.ballotpedia_url||'').trim());
+    if(!withUrl.length){
+      li.innerHTML='<a class="reslink" href="https://ballotpedia.org" target="_blank" '+
+                   'rel="noopener">Ballotpedia</a>';
+      return;
+    }
+    li.innerHTML='';
+    const lead=document.createElement('span');
+    lead.textContent='Ballotpedia — ';
+    li.appendChild(lead);
+    withUrl.forEach((c,i)=>{
+      const a=document.createElement('a'); a.className='reslink';
+      a.href=c.ballotpedia_url; a.target='_blank'; a.rel='noopener';
+      a.textContent=c.candidate;
+      li.appendChild(a);
+      if(i<withUrl.length-1) li.appendChild(document.createTextNode(' · '));
+    });
+  }
+
   function renderRace(r){
     state.pick.race=r;
     document.getElementById('raceTitle').textContent=raceLabel(r);
@@ -3257,7 +3294,7 @@
     document.getElementById('raceCard').style.display='';
     document.getElementById('noCoverage').style.display='none';
     showKit(true);
-    renderFacts(r); renderIdeas(r); renderGuests(r); renderInfographicsFor(r);
+    renderFacts(r); renderIdeas(r); renderGuests(r); renderInfographicsFor(r); renderBallotpediaLinks(r);
     renderWatchList(r); retitleCards(r); renderCongress(r);
     renderLocalCoverage(r.state);
     renderVoterLinks(r.state);
@@ -3289,7 +3326,7 @@
     nc.style.display=''; document.getElementById('raceCard').style.display='none';
     showKit(false);
   }
-  function renderNoCoverage(st,issue){
+  function renderNoCoverage(st,issue,fromPicker){
     /* Picking "Other..." used to land on a dead end. It is a hyper-local or niche
        beat by definition, so the honest answer is to route it to a person. */
     if(state.pick.issueOther){
@@ -3382,8 +3419,12 @@
       document.getElementById('ncStateGo').addEventListener('click',()=>{
         const pick=sel.value;
         if(!pick){ toast('Pick a state first.'); sel.focus(); return; }
-        state.pick.state=pick;
-        renderNoCoverage(pick,issue);
+        /* Do NOT write this into state.pick.state. That is the wizard's own answer,
+           and overwriting it locked the user into the state they typed here: Back
+           and Start over both re-resolved to it, so the only way out was reloading
+           the page (beta feedback, 2026-09-10). This is a local lookup, so keep it
+           local and pass it as an argument. */
+        renderNoCoverage(pick,issue,true);
       });
     }
     if(st&&n) racesFor(st,null).forEach(r=>{
@@ -3394,6 +3435,14 @@
       btn.addEventListener('click',()=>{ nc.style.display='none'; renderRace(r); });
       b.appendChild(btn);
     });
+    if(fromPicker){
+      const again=document.createElement('button');
+      again.type='button'; again.className='btn ghost sm';
+      again.style.cssText='margin-top:12px;';
+      again.textContent='\u2190 Choose a different state';
+      again.addEventListener('click',()=>{ renderNoCoverage(null,issue,false); });
+      b.appendChild(again);
+    }
     const toForm=document.getElementById('ncToForm');
     if(toForm) toForm.addEventListener('click',()=>{
       state.pick.issueOther=true; renderNoCoverage(st,issue);
@@ -3728,8 +3777,12 @@
   function renderInfographicsFor(r){
     const igList=document.getElementById('igList'); if(!igList) return;
     igList.innerHTML='';
-    const items = r ? raceInfographics(r).concat(INFOGRAPHICS.filter(ig=>!/Scorecard|Explained/.test(ig.t)))
-                    : INFOGRAPHICS;
+    /* "Key Dates" is excluded alongside the hidden Key Dates card (2026-09-10):
+       it still holds Ohio's sample deadlines, and a sample date on a downloadable
+       graphic is worse than no graphic. Restore by deleting |Key Dates from both
+       filters once the October data is in election_admin.csv. */
+    const items = r ? raceInfographics(r).concat(INFOGRAPHICS.filter(ig=>!/Scorecard|Explained|Key Dates/.test(ig.t)))
+                    : INFOGRAPHICS.filter(ig=>!/Key Dates/.test(ig.t));
     const specs = editableSpec(r);
     // the priorities graphic is titled for the chosen state and is editable
     const editKeys = Object.keys(specs);
@@ -4330,24 +4383,38 @@
       document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
     }
     const rows=m.querySelector('#shareRows'); rows.innerHTML='';
-    const add=(label,href,onclick)=>{
+    const add=(icon,label,href,onclick)=>{
       const a=document.createElement(href?'a':'button');
-      a.className='btn white'; a.style.cssText='display:block;width:100%;margin-top:8px;text-align:left;text-decoration:none;';
-      a.textContent=label;
-      if(href){ a.href=href; a.target='_blank'; a.rel='noopener'; } else { a.type='button'; a.addEventListener('click',onclick); }
+      a.className='sharebtn';
+      a.innerHTML='<span class="si"></span><span class="sl"></span>';
+      a.querySelector('.si').textContent=icon;
+      a.querySelector('.sl').textContent=label;
+      if(href){ a.href=href; a.target='_blank'; a.rel='noopener'; }
+      else { a.type='button'; a.addEventListener('click',onclick); }
       rows.appendChild(a);
     };
+    /* Instagram and TikTok publish NO web share URL -- there is no equivalent of
+       twitter.com/intent or facebook.com/sharer, by their design. The only route
+       to them is the device's own share sheet, which navigator.share opens and
+       which lists every installed app. That exists on mobile and Safari, so on a
+       phone this row IS the Instagram/TikTok option; on desktop it is absent and
+       copy-then-paste is the honest answer. */
     if(navigator.share){
-      add('↗️  Share… (messages, apps, AirDrop)',null,()=>{
+      add('↗️','Share to Instagram, TikTok, Messages…',null,()=>{
         navigator.share({title:txt,text:txt,url:url}).catch(()=>{});
       });
     }
-    add('✉️  Email', 'mailto:?subject='+enc(txt)+'&body='+enc(txt+'\n\n'+url));
-    add('💬  Text message', 'sms:?&body='+enc(txt+' '+url));
-    add('𝕏  Post on X', 'https://twitter.com/intent/tweet?text='+enc(txt)+'&url='+enc(url));
-    add('📘  Facebook', 'https://www.facebook.com/sharer/sharer.php?u='+enc(url));
-    add('💼  LinkedIn', 'https://www.linkedin.com/sharing/share-offsite/?url='+enc(url));
-    add('📋  Copy link again',null,()=>{ fallbackCopy(url,()=>toast('Kit link copied')); });
+    add('✉️','Email', 'mailto:?subject='+enc(txt)+'&body='+enc(txt+'\n\n'+url));
+    add('💬','Text message', 'sms:?&body='+enc(txt+' '+url));
+    add('𝕏','Post on X', 'https://twitter.com/intent/tweet?text='+enc(txt)+'&url='+enc(url));
+    add('📋','Copy link again',null,()=>{ fallbackCopy(url,()=>toast('Kit link copied')); });
+    if(!navigator.share){
+      const n=document.createElement('p'); n.className='savehint';
+      n.style.cssText='margin:12px 0 0;font-size:13.5px;';
+      n.innerHTML='For <b>Instagram</b> or <b>TikTok</b>, copy the link and paste it '+
+                  'into your bio or caption \u2014 neither app allows a website to post on your behalf.';
+      rows.appendChild(n);
+    }
     m.querySelector('#shareUrl').textContent=url;
     m.classList.add('open');
   }
